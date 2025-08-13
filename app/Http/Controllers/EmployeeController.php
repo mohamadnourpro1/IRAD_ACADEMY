@@ -11,7 +11,7 @@ class EmployeeController extends Controller
   use ApiResponse;
   public function __construct()
     {
-        $this->middleware('role:Admin')->only(['store','update','destroy']);
+        $this->middleware('role:Admin')->only(['store','update','destroy','index','show']);
     }
     /**
      * Display a listing of the resource.
@@ -20,7 +20,8 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        //
+        $employee = Employee::all();
+        return $this->apiresponse($employee,'all employees',200);
     }
 
     /**
@@ -64,9 +65,13 @@ class EmployeeController extends Controller
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function show(Employee $employee)
+    public function show($id)
     {
-        //
+        $employee = Employee::findOrFail($id);
+        if($employee){
+          return $this->apiresponse($employee,'employee details',200);
+        }
+        return $this->apiresponse(null,'employee not found',404);
     }
 
     /**

@@ -11,7 +11,7 @@ class StudentController extends Controller
   use ApiResponse;
   public function __construct()
     {
-        $this->middleware('role:Admin')->only(['store','update','destroy']);;
+        $this->middleware('role:Admin')->only(['store','update','destroy','index','show']);;
     }
     /**
      * Display a listing of the resource.
@@ -20,7 +20,8 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
+        $students = Student::all();
+        return $this->apiresponse($students,'all students',200);
     }
 
     /**
@@ -64,9 +65,13 @@ class StudentController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function show(Student $student)
+    public function show($id)
     {
-        //
+        $student = Student::findOrFail($id);
+        if($student){
+          return $this->apiresponse($student,'student details',200);
+        }
+        return $this->apiresponse(null,'student not found',404);
     }
 
     /**
