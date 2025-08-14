@@ -67,7 +67,7 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        $employee = Employee::findOrFail($id);
+        $employee = Employee::find($id);
         if($employee){
           return $this->apiresponse($employee,'employee details',200);
         }
@@ -83,7 +83,7 @@ class EmployeeController extends Controller
      */
         public function update(Request $request, $id)
 {
-    $employee = Employee::findOrFail($id); // البحث بالـ id
+    $employee = Employee::find($id); // البحث بالـ id
 
     $validator = Validator::make($request->all(), [
         'name' => 'sometimes|required|string',
@@ -124,7 +124,7 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
 {
-    $employee = Employee::findOrFail($id); // البحث بالـ id
+    $employee = Employee::find($id); // البحث بالـ id
     $employee->delete(); // يحذف معه الـ User تلقائياً من الـ boot()
     // $user = $employee->user;
     //         if ($user) {

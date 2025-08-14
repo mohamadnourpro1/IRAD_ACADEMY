@@ -4,7 +4,10 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserRoleController;
 use App\Http\Controllers\Auth\PasswordResetController;
+use App\Http\Controllers\CategoryCoursesController;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\GroupController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use Illuminate\Http\Request;
@@ -39,7 +42,12 @@ Route::middleware("auth:sanctum")->group(function(){
     Route::apiResource('teachers',TeacherController::class);
 //students
     Route::apiResource('students',StudentController::class);
-
+//category courses
+    Route::apiResource('category_courses',CategoryCoursesController::class);
+//courses
+    Route::apiResource('courses',CourseController::class);
+//group
+    Route::apiResource('groups',GroupController::class);
 });
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

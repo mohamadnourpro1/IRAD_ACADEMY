@@ -52,7 +52,13 @@ class Teacher extends Model
             }
         });
     }
+
     public function user(){
       return  $this->belongsTo(User::class,'user_id');
+    }
+
+    public function groups()
+    {
+        return $this->belongsToMany(Group::class, 'groups_teachers', 'teacher_id', 'group_id');
     }
 }
